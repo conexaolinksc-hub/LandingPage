@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button'
 import { useUIStore } from '@/store/uiStore'
 import { NAV_LINKS } from '@/constants/navigation'
 import { cn } from '@/lib/utils'
+import { scrollToSection } from '@/utils/scroll'
 
 /* Items exclusivos do menu mobile — mais detalhados */
 const MOBILE_ITEMS = [
@@ -73,7 +74,7 @@ export function Navbar() {
 
   const handleNavClick = (href: string) => {
     closeMobileMenu()
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+    scrollToSection(href)
   }
 
   return (

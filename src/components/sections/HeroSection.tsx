@@ -1,18 +1,12 @@
 'use client'
 
-import { motion, type Variants } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Zap } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ParticleNetwork } from '@/components/ui/ParticleNetwork'
+import { fadeUpContainer, fadeUpItem } from '@/lib/animations'
+import { scrollToSection } from '@/utils/scroll'
 
-const container: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.13, delayChildren: 0.1 } },
-}
-const item: Variants = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
-}
 
 /* Animated blob data */
 const blobs = [
@@ -45,8 +39,7 @@ const blobs = [
 ]
 
 export function HeroSection() {
-  const scrollTo = (id: string) =>
-    document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' })
+  const scrollTo = (id: string) => scrollToSection(id)
 
   return (
     <section
@@ -126,15 +119,14 @@ export function HeroSection() {
         />
       </div>
 
-      {/* ── Content ── */}
       <motion.div
         className="container mx-auto px-6 relative z-10 pt-28 pb-16 max-w-3xl"
-        variants={container}
+        variants={fadeUpContainer}
         initial="hidden"
         animate="visible"
       >
         {/* Badge */}
-        <motion.div variants={item}>
+        <motion.div variants={fadeUpItem}>
           <span className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-black/8 shadow-sm rounded-full px-4 py-2 text-sm font-medium text-foreground/70 mb-8">
             <Zap size={14} className="text-brand-green" />
             Internet de verdade para quem não pode parar
@@ -143,7 +135,7 @@ export function HeroSection() {
 
         {/* Headline */}
         <motion.h1
-          variants={item}
+          variants={fadeUpItem}
           className="text-5xl md:text-7xl font-black leading-[1.04] tracking-tight mb-6 text-foreground"
         >
           Conectividade que{' '}
@@ -152,7 +144,7 @@ export function HeroSection() {
 
         {/* Sub */}
         <motion.p
-          variants={item}
+          variants={fadeUpItem}
           className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 max-w-xl"
         >
           Soluções empresariais e link dedicado com SLA garantido.
@@ -160,7 +152,7 @@ export function HeroSection() {
         </motion.p>
 
         {/* CTAs */}
-        <motion.div variants={item} className="flex flex-wrap gap-4">
+        <motion.div variants={fadeUpItem} className="flex flex-wrap gap-4">
           <Button
             size="lg"
             className="gradient-brand text-white font-semibold text-base px-8 shadow-lg shadow-brand-blue/20 hover:opacity-90 transition-opacity border-0"

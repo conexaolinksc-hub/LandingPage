@@ -5,9 +5,17 @@ import { motion } from 'framer-motion'
 import { CheckCircle2, ArrowRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { SectionHeader } from '@/components/ui/SectionHeader'
 import { useScrollAnimation } from '@/hooks/useScrollAnimation'
+import { scrollToSection } from '@/utils/scroll'
 
-const services = [
+/* ─── Service card data ────────────────────────────────────────────────────
+   Styling strings live here alongside content since they're tightly coupled
+   to this component's visual design. Pure content (titles, descriptions) is
+   intentionally kept here for co-location — not in content.ts — because the
+   styling tokens would have no meaning outside this component.
+─────────────────────────────────────────────────────────────────────────── */
+const SERVICES = [
   {
     id: 'srv-empresarial',
     badge: 'Plano Empresarial',
@@ -54,48 +62,38 @@ const services = [
     ctaClass: 'gradient-brand text-white border-0',
     shadow: 'shadow-brand-blue/10',
   },
-]
+] as const
 
 export function ServicesSection() {
   const { ref, isInView } = useScrollAnimation()
-
-  const scrollTo = (id: string) =>
-    document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' })
 
   return (
     <section id="servicos" className="py-20 bg-bg-surface">
       <div className="container mx-auto px-6">
 
-        {/* Header */}
-        <div className="text-center mb-14">
-          <Badge className="bg-brand-blue/10 text-brand-blue border-brand-blue/20 mb-4 text-xs font-semibold uppercase tracking-widest">
-            Nossos Serviços
-          </Badge>
-          <h2 className="text-4xl md:text-5xl font-black leading-tight text-foreground mb-3">
-            Duas soluções,{' '}
-            <span className="gradient-text">uma só confiança</span>
-          </h2>
-          <p className="text-muted-foreground max-w-md mx-auto">
-            Escolha o plano ideal para o seu negócio e conte com a estabilidade que você merece.
-          </p>
-        </div>
+        <SectionHeader
+          badge="Nossos Serviços"
+          title="Duas soluções, uma só confiança"
+          highlight="uma só confiança"
+          subtitle="Escolha o plano ideal para o seu negócio e conte com a estabilidade que você merece."
+        />
 
         {/* Cards */}
         <div ref={ref} className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {services.map((srv, i) => (
+          {SERVICES.map((srv, i) => (
             <motion.div
               key={srv.id}
               id={srv.id}
               initial={{ opacity: 0, y: 36 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.6, delay: i * 0.15, ease: 'easeOut' }}
               className={`
                 group flex flex-col bg-white rounded-2xl border border-border
                 ${srv.hoverBorder} hover:shadow-xl ${srv.shadow}
                 hover:-translate-y-1 transition-all duration-300 overflow-hidden shadow-md
               `}
             >
-              {/* Image area */}
+              {/* Image */}
               <div className={`relative w-full h-52 bg-gradient-to-br ${srv.accentFrom} ${srv.accentTo} overflow-hidden`}>
                 <Image
                   src={srv.image}
@@ -113,11 +111,8 @@ export function ServicesSection() {
                 </Badge>
 
                 <h3 className="text-2xl font-black text-foreground mb-3">{srv.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                  {srv.description}
-                </p>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-6">{srv.description}</p>
 
-                {/* Features */}
                 <ul className="flex flex-col gap-2.5 mb-8">
                   {srv.features.map((feat) => (
                     <li key={feat} className="flex items-center gap-2.5 text-sm text-foreground/80">
@@ -127,11 +122,10 @@ export function ServicesSection() {
                   ))}
                 </ul>
 
-                {/* CTA */}
                 <div className="mt-auto">
                   <Button
                     className={`w-full font-semibold shadow-md ${srv.ctaClass} hover:opacity-90 transition-opacity`}
-                    onClick={() => scrollTo('#contato')}
+                    onClick={() => scrollToSection('#contato')}
                     id={`${srv.id}-cta`}
                   >
                     {srv.ctaLabel}

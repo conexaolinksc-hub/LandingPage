@@ -1,33 +1,10 @@
 'use client'
 
-import { Phone, MessageCircle, Mail } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { Badge } from '@/components/ui/badge'
+import { SectionHeader } from '@/components/ui/SectionHeader'
 import { ContactForm } from '@/components/forms/ContactForm'
 import { useScrollAnimation } from '@/hooks/useScrollAnimation'
-import { SITE } from '@/constants/site'
-
-const contactItems = [
-  {
-    id: 'contact-phone',
-    icon: Phone,
-    label: SITE.phone,
-    href: `tel:${SITE.phone.replace(/\D/g, '')}`,
-  },
-  {
-    id: 'contact-whatsapp',
-    icon: MessageCircle,
-    label: 'WhatsApp',
-    href: `https://wa.me/${SITE.whatsapp}`,
-    external: true,
-  },
-  {
-    id: 'contact-email',
-    icon: Mail,
-    label: SITE.email,
-    href: `mailto:${SITE.email}`,
-  },
-]
+import { CONTACT_ITEMS } from '@/constants/content'
 
 export function ContactSection() {
   const { ref, isInView } = useScrollAnimation()
@@ -41,21 +18,20 @@ export function ContactSection() {
           <motion.div
             initial={{ opacity: 0, x: -28 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.65, ease: 'easeOut' }}
           >
-            <Badge className="bg-brand-green/10 text-brand-green border-brand-green/25 mb-5 text-xs font-semibold uppercase tracking-widest">
-              Contato
-            </Badge>
-            <h2 className="text-3xl md:text-4xl font-black leading-tight mb-3 text-foreground">
-              Pronto para{' '}
-              <span className="gradient-text">conectar sua empresa?</span>
-            </h2>
-            <p className="text-muted-foreground mb-6 leading-relaxed text-sm">
-              Fale com um consultor e receba uma proposta adequada ao seu negócio.
-            </p>
+            <SectionHeader
+              badge="Contato"
+              title="Pronto para conectar sua empresa?"
+              highlight="conectar sua empresa?"
+              subtitle="Fale com um consultor e receba uma proposta adequada ao seu negócio."
+              align="left"
+              badgeClassName="bg-brand-green/10 text-brand-green border-brand-green/25"
+              className="mb-6"
+            />
 
             <div className="flex flex-col gap-4">
-              {contactItems.map((item) => {
+              {CONTACT_ITEMS.map((item) => {
                 const Icon = item.icon
                 return (
                   <a
@@ -82,10 +58,11 @@ export function ContactSection() {
           <motion.div
             initial={{ opacity: 0, x: 28 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.65, delay: 0.1, ease: 'easeOut' }}
           >
             <ContactForm />
           </motion.div>
+
         </div>
       </div>
     </section>

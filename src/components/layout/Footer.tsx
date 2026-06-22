@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import Image from 'next/image'
 import { SITE } from '@/constants/site'
 
@@ -8,7 +7,7 @@ export function Footer() {
       <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
         <Image
           src="/logo.png"
-          alt="ConexãoLink"
+          alt={SITE.name}
           width={140}
           height={44}
           className="h-9 w-auto object-contain"
@@ -17,14 +16,6 @@ export function Footer() {
         <p className="text-sm text-muted-foreground">
           © {new Date().getFullYear()} {SITE.name}. Todos os direitos reservados.
         </p>
-        <div className="flex gap-6">
-          <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-            Política de Privacidade
-          </Link>
-          <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-            Termos de Uso
-          </Link>
-        </div>
       </div>
     </footer>
   )

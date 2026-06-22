@@ -14,12 +14,8 @@ import {
 } from '@/components/ui/select'
 import { useContactForm } from '@/hooks/useContactForm'
 import { cn } from '@/lib/utils'
+import { INTEREST_OPTIONS } from '@/constants/content'
 
-const INTEREST_OPTIONS = [
-  { value: 'empresarial', label: 'Plano Empresarial' },
-  { value: 'dedicado', label: 'Link Dedicado' },
-  { value: 'outro', label: 'Outro' },
-]
 
 export function ContactForm() {
   const { form, onSubmit, serverMessage } = useContactForm()
