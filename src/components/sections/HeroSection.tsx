@@ -102,7 +102,7 @@ export function HeroSection() {
           alt="Fachada ConexãoLink"
           fill
           className="object-cover object-center"
-          style={{ opacity: 0.45 }}
+          style={{ opacity: 0.65 }}
           sizes="52vw"
           priority
         />
