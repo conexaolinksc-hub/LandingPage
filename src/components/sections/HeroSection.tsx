@@ -142,6 +142,26 @@ export function HeroSection() {
               Solicitar Proposta
             </Button>
           </motion.div>
+
+          {/* Fachada mobile — abaixo dos botões, sem sobrepor o texto */}
+          <motion.div
+            variants={fadeUpItem}
+            className="block lg:hidden mt-8 relative h-56 w-full rounded-2xl overflow-hidden shadow-md"
+          >
+            <Image
+              src="/fachada.webp"
+              alt="Fachada ConexãoLink"
+              fill
+              className="object-cover object-center"
+              sizes="100vw"
+              priority
+            />
+            {/* Fade inferior para integrar com a seção seguinte */}
+            <div
+              className="absolute inset-x-0 bottom-0 h-16 pointer-events-none"
+              style={{ background: 'linear-gradient(to bottom, transparent, var(--bg-base))' }}
+            />
+          </motion.div>
         </div>
       </motion.div>
 
