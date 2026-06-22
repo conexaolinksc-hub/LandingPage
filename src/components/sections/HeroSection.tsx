@@ -7,11 +7,11 @@ import { Button } from '@/components/ui/button'
 
 const container: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.13, delayChildren: 0.15 } },
 }
 const item: Variants = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: 'easeOut' } },
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
 }
 
 export function HeroSection() {
@@ -21,97 +21,102 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-[88vh] flex items-center overflow-hidden bg-bg-base"
+      className="relative min-h-[92vh] flex items-center overflow-hidden"
     >
-      {/* Subtle bg gradient */}
+      {/* ── Background cover image ── */}
+      <Image
+        src="/hero-cover.png"
+        alt=""
+        fill
+        className="object-cover object-center"
+        sizes="100vw"
+        priority
+        aria-hidden
+      />
+
+      {/* ── Dark overlay for text readability ── */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0"
+        className="absolute inset-0"
         style={{
-          background: `
-            radial-gradient(ellipse 65% 60% at 75% 40%, oklch(0.88 0.06 264 / 0.5) 0%, transparent 65%),
-            radial-gradient(ellipse 40% 40% at 10% 80%, oklch(0.90 0.05 142 / 0.35) 0%, transparent 60%)
-          `,
+          background:
+            'linear-gradient(105deg, oklch(0.08 0.04 264 / 0.82) 0%, oklch(0.10 0.06 264 / 0.65) 55%, oklch(0.12 0.08 180 / 0.30) 100%)',
         }}
       />
 
-      <div className="container mx-auto px-6 relative z-10 pt-24 pb-12">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      {/* ── Content ── */}
+      <motion.div
+        className="container mx-auto px-6 relative z-10 pt-28 pb-20 max-w-4xl"
+        variants={container}
+        initial="hidden"
+        animate="visible"
+      >
+        {/* Badge */}
+        <motion.div variants={item}>
+          <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 text-sm font-medium text-white/90 mb-8">
+            <Zap size={14} className="text-emerald-400" />
+            Internet de verdade para quem não pode parar
+          </span>
+        </motion.div>
 
-          {/* ── Left: copy ── */}
-          <motion.div variants={container} initial="hidden" animate="visible">
-            <motion.div variants={item}>
-              <span className="inline-flex items-center gap-2 bg-white border border-black/8 shadow-sm rounded-full px-4 py-2 text-sm font-medium text-foreground/70 mb-8">
-                <Zap size={14} className="text-brand-green" />
-                Internet de verdade para quem não pode parar
-              </span>
-            </motion.div>
-
-            <motion.h1
-              variants={item}
-              className="text-5xl md:text-6xl font-black leading-[1.05] tracking-tight mb-5 text-foreground"
-            >
-              Conectividade que{' '}
-              <span className="gradient-text">impulsiona negócios</span>
-            </motion.h1>
-
-            <motion.p variants={item} className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-lg">
-              Soluções empresariais e link dedicado com SLA garantido.
-              Estabilidade que a sua operação exige.
-            </motion.p>
-
-            <motion.div variants={item} className="flex flex-wrap gap-4">
-              <Button
-                size="lg"
-                className="gradient-brand text-white font-semibold text-base px-8 shadow-lg shadow-brand-blue/20 hover:opacity-90 transition-opacity border-0"
-                onClick={() => scrollTo('#servicos')}
-                id="hero-cta-solutions"
-              >
-                Nossos Serviços
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="text-foreground border-black/15 bg-white hover:bg-bg-surface hover:border-brand-blue hover:text-brand-blue transition-all text-base px-8 shadow-sm"
-                onClick={() => scrollTo('#contato')}
-                id="hero-cta-contact"
-              >
-                Solicitar Proposta
-              </Button>
-            </motion.div>
-          </motion.div>
-
-          {/* ── Right: banner image ── */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, x: 32 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden lg:flex items-center justify-center"
+        {/* Headline */}
+        <motion.h1
+          variants={item}
+          className="text-5xl md:text-7xl font-black leading-[1.04] tracking-tight mb-6 text-white"
+        >
+          Conectividade que{' '}
+          <span
+            style={{
+              background: 'linear-gradient(135deg, #60a5fa 0%, #34d399 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
           >
-            <div className="relative w-full max-w-lg">
-              {/* Glow ring behind image */}
-              <div
-                aria-hidden
-                className="absolute inset-6 rounded-3xl"
-                style={{
-                  background: 'linear-gradient(135deg, oklch(0.75 0.14 264 / 0.18), oklch(0.70 0.14 142 / 0.14))',
-                  filter: 'blur(32px)',
-                }}
-              />
-              <Image
-                src="/hero-banner.png"
-                alt="ConexãoLink — rede de alta performance"
-                width={600}
-                height={480}
-                className="relative rounded-2xl w-full h-auto object-cover shadow-2xl shadow-brand-blue/10"
-                sizes="(max-width: 1024px) 0px, 50vw"
-                priority
-              />
-            </div>
-          </motion.div>
+            impulsiona negócios
+          </span>
+        </motion.h1>
 
-        </div>
-      </div>
+        {/* Sub */}
+        <motion.p
+          variants={item}
+          className="text-lg md:text-xl text-white/75 leading-relaxed mb-10 max-w-xl"
+        >
+          Soluções empresariais e link dedicado com SLA garantido.
+          Estabilidade que a sua operação exige.
+        </motion.p>
+
+        {/* CTAs */}
+        <motion.div variants={item} className="flex flex-wrap gap-4">
+          <Button
+            size="lg"
+            className="text-white font-semibold text-base px-8 border-0 shadow-lg"
+            style={{ background: 'linear-gradient(135deg, #2563eb 0%, #0d9488 100%)' }}
+            onClick={() => scrollTo('#servicos')}
+            id="hero-cta-solutions"
+          >
+            Nossos Serviços
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="text-white border-white/30 bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-white/50 transition-all text-base px-8"
+            onClick={() => scrollTo('#contato')}
+            id="hero-cta-contact"
+          >
+            Solicitar Proposta
+          </Button>
+        </motion.div>
+      </motion.div>
+
+      {/* ── Bottom fade into page bg ── */}
+      <div
+        aria-hidden
+        className="absolute bottom-0 left-0 right-0 h-28 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to bottom, transparent, var(--bg-base))',
+        }}
+      />
     </section>
   )
 }
