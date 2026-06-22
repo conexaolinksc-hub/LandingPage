@@ -65,8 +65,8 @@
   --radius-lg:  var(--radius);
   --radius-xl:  calc(var(--radius) * 1.4);
   --radius-2xl: calc(var(--radius) * 2);
-  --font-sans:    var(--font-body);
-  --font-display: var(--font-display);
+  --font-sans:    var(--font-display);
+
 }
 
 @layer base {
@@ -75,7 +75,8 @@
   }
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 400;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;

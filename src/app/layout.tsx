@@ -4,22 +4,14 @@ import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { Providers } from '@/components/layout/Providers'
 import { FloatingButtons } from '@/components/ui/FloatingButtons'
-import { Syne, DM_Sans } from 'next/font/google'
+import { Raleway } from 'next/font/google'
 import { SITE } from '@/constants/site'
 
-/** Fonte de display — títulos e headlines */
-const syne = Syne({
+/** Raleway — elegante e sofisticada para títulos e corpo */
+const raleway = Raleway({
   subsets: ['latin'],
   variable: '--font-display',
-  weight: ['400', '600', '700', '800'],
-  display: 'swap',
-})
-
-/** Fonte de corpo — parágrafos, UI, labels */
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  variable: '--font-body',
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600', '700', '800'],
   display: 'swap',
 })
 
@@ -42,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-BR" className={`${syne.variable} ${dmSans.variable}`}>
+    <html lang="pt-BR" className={raleway.variable}>
       <body>
         <Providers>
           <Navbar />
