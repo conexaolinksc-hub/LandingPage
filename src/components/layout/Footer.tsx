@@ -12,7 +12,7 @@ export function Footer() {
       <div className="container mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-3 gap-10">
 
         {/* Col 1 — Brand */}
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col items-start gap-5">
           <Image
             src="/logo.png"
             alt={SITE.name}
