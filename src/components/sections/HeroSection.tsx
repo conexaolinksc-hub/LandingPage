@@ -74,7 +74,27 @@ export function HeroSection() {
       {/* ── Partículas ── */}
       <ParticleNetwork />
 
-      {/* ── Fachada discreta (lado direito) ── */}
+      {/* ── Fachada mobile (fundo completo) ── */}
+      <div
+        aria-hidden
+        className="block lg:hidden absolute inset-0 pointer-events-none"
+        style={{
+          maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 80%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 80%, transparent 100%)',
+        }}
+      >
+        <Image
+          src="/fachada.webp"
+          alt="Fachada ConexãoLink"
+          fill
+          className="object-cover object-center"
+          style={{ opacity: 0.22 }}
+          sizes="100vw"
+          priority
+        />
+      </div>
+
+      {/* ── Fachada desktop (lado direito) ── */}
       <div
         aria-hidden
         className="hidden lg:block absolute right-0 top-0 bottom-0 w-[52%] pointer-events-none"
