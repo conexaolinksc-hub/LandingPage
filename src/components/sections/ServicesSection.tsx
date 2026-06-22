@@ -99,7 +99,7 @@ export function ServicesSection() {
                   src={srv.image}
                   alt={srv.imageAlt}
                   fill
-                  className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>

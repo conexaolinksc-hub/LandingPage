@@ -18,7 +18,9 @@ export async function submitContactForm(
 
     const { error } = await resend.emails.send({
       from: EMAIL_FROM,
-      to: [...SITE.notifyEmails],   // contato@conecaolinkes.com.br + jullianaqoliveira@gmail.com
+      // TODO: após verificar domínio em resend.com/domains, trocar para [...SITE.notifyEmails]
+      // Enquanto o domínio não está verificado, o Resend só entrega para o e-mail da conta
+      to: ['conexaolink.sc@gmail.com'],
       replyTo: email,
       subject: `[ConexãoLink] Nova proposta de ${nome}`,
       html: buildLeadEmail({ nome, email, telefone, interesse, mensagem }),
