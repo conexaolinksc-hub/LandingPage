@@ -1,73 +1,126 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Zap, Wifi } from 'lucide-react'
+import { Zap } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { ParticleNetwork } from '@/components/ui/ParticleNetwork'
 import { fadeUpContainer, fadeUpItem } from '@/lib/animations'
 import { scrollToSection } from '@/utils/scroll'
 
-/* Número de anéis pulsantes */
-const RINGS = [0, 1, 2, 3, 4]
+
+/* Animated blob data */
+const blobs = [
+  {
+    style: { top: '-12%', right: '-8%', width: 720, height: 720 },
+    color: 'oklch(0.68 0.20 264)',
+    animate: { y: [0, -30, 0], x: [0, 18, 0], scale: [1, 1.06, 1] },
+    duration: 10,
+  },
+  {
+    style: { bottom: '-18%', left: '-10%', width: 620, height: 620 },
+    color: 'oklch(0.66 0.20 162)',
+    animate: { y: [0, 28, 0], x: [0, -16, 0], scale: [1, 0.94, 1] },
+    duration: 13,
+  },
+  {
+    style: { top: '28%', left: '32%', width: 470, height: 470 },
+    color: 'oklch(0.72 0.16 220)',
+    animate: { y: [0, -22, 0], x: [0, 24, 0], scale: [1, 1.08, 1] },
+    duration: 11,
+    delay: 1.5,
+  },
+  {
+    style: { top: '-6%', left: '13%', width: 330, height: 330 },
+    color: 'oklch(0.76 0.16 290)',
+    animate: { y: [0, 22, 0], scale: [1, 0.92, 1] },
+    duration: 9,
+    delay: 2,
+  },
+]
 
 export function HeroSection() {
+  const scrollTo = (id: string) => scrollToSection(id)
+
   return (
     <section
       id="home"
-      className="relative min-h-[92vh] flex items-center overflow-hidden bg-white"
+      className="relative min-h-[92vh] flex items-center overflow-hidden"
+      style={{ background: 'oklch(0.985 0.006 264)' }}
     >
-      {/* ── Keyframes inline ── */}
-      <style>{`
-        @keyframes wave-scroll {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        @keyframes ring-expand {
-          0%   { transform: scale(1);   opacity: 0.55; }
-          100% { transform: scale(2.8); opacity: 0; }
-        }
-      `}</style>
+      {/* ── Animated blobs ── */}
+      {blobs.map((blob, i) => (
+        <motion.div
+          key={i}
+          aria-hidden
+          className="pointer-events-none absolute rounded-full"
+          style={{
+            ...blob.style,
+            background: blob.color,
+            filter: 'blur(85px)',
+            opacity: 0.22,
+          }}
+          animate={blob.animate}
+          transition={{
+            duration: blob.duration,
+            delay: blob.delay ?? 0,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+      ))}
 
-      {/* ── Fundo gradiente suave ── */}
+      {/* ── Dot grid ── */}
       <div
         aria-hidden
-        className="absolute inset-0 pointer-events-none"
+        className="pointer-events-none absolute inset-0"
         style={{
-          background:
-            'radial-gradient(ellipse 80% 60% at 70% 50%, oklch(0.94 0.06 264 / 0.55), transparent 70%), ' +
-            'radial-gradient(ellipse 60% 50% at 20% 80%, oklch(0.94 0.06 162 / 0.35), transparent 70%)',
+          backgroundImage:
+            'radial-gradient(circle, oklch(0.50 0.12 264 / 0.14) 1px, transparent 1px)',
+          backgroundSize: '33px 33px',
         }}
       />
 
-      {/* ── Anéis pulsantes (decoração direita) ── */}
+      {/* ── Particle network ── */}
+      <ParticleNetwork />
+
+      {/* ── Decorative rings ── */}
       <div
         aria-hidden
-        className="absolute right-16 top-1/2 -translate-y-1/2 pointer-events-none hidden lg:flex items-center justify-center"
+        className="pointer-events-none absolute"
+        style={{ right: '6%', top: '18%' }}
       >
-        {RINGS.map((i) => (
-          <div
-            key={i}
-            className="absolute rounded-full border-2 border-brand-blue"
-            style={{
-              width: 88 + i * 72,
-              height: 88 + i * 72,
-              opacity: 0,
-              animation: `ring-expand 3.2s ease-out infinite`,
-              animationDelay: `${i * 0.64}s`,
-            }}
-          />
-        ))}
-        {/* Ícone central */}
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
+          style={{
+            width: 340,
+            height: 340,
+            borderRadius: '50%',
+            border: '1.5px solid oklch(0.55 0.18 264 / 0.22)',
+          }}
+        />
+        <motion.div
+          animate={{ rotate: -360 }}
+          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+          style={{
+            position: 'absolute',
+            inset: 36,
+            borderRadius: '50%',
+            border: '1.5px solid oklch(0.55 0.16 162 / 0.24)',
+          }}
+        />
         <div
-          className="relative z-10 w-20 h-20 rounded-full gradient-brand flex items-center justify-center shadow-2xl"
-          style={{ boxShadow: '0 0 40px oklch(0.55 0.22 264 / 0.35)' }}
-        >
-          <Wifi size={34} className="text-white" strokeWidth={2.2} />
-        </div>
+          style={{
+            position: 'absolute',
+            inset: 76,
+            borderRadius: '50%',
+            border: '1.5px solid oklch(0.60 0.14 220 / 0.28)',
+          }}
+        />
       </div>
 
-      {/* ── Conteúdo ── */}
       <motion.div
-        className="container mx-auto px-6 relative z-10 pt-32 pb-44 max-w-2xl"
+        className="container mx-auto px-6 relative z-10 pt-28 pb-16 max-w-3xl"
         variants={fadeUpContainer}
         initial="hidden"
         animate="visible"
@@ -89,7 +142,7 @@ export function HeroSection() {
           <span className="gradient-text">impulsiona negócios</span>
         </motion.h1>
 
-        {/* Subtítulo */}
+        {/* Sub */}
         <motion.p
           variants={fadeUpItem}
           className="text-lg md:text-xl text-foreground/75 leading-relaxed mb-10 max-w-xl"
@@ -103,7 +156,7 @@ export function HeroSection() {
           <Button
             size="lg"
             className="gradient-brand text-white font-semibold text-base px-8 shadow-lg shadow-brand-blue/20 hover:opacity-90 transition-opacity border-0"
-            onClick={() => scrollToSection('#servicos')}
+            onClick={() => scrollTo('#servicos')}
             id="hero-cta-solutions"
           >
             Nossos Serviços
@@ -112,7 +165,7 @@ export function HeroSection() {
             size="lg"
             variant="outline"
             className="text-foreground border-black/15 bg-white/70 backdrop-blur-sm hover:bg-bg-surface hover:border-brand-blue hover:text-brand-blue transition-all text-base px-8 shadow-sm"
-            onClick={() => scrollToSection('#contato')}
+            onClick={() => scrollTo('#contato')}
             id="hero-cta-contact"
           >
             Solicitar Proposta
@@ -120,66 +173,11 @@ export function HeroSection() {
         </motion.div>
       </motion.div>
 
-      {/* ── Ondas animadas na base ── */}
+      {/* ── Bottom fade ── */}
       <div
         aria-hidden
-        className="absolute bottom-0 left-0 right-0 pointer-events-none"
-        style={{ height: 200 }}
-      >
-        {/* Onda 3 — fundo, mais lenta */}
-        <div
-          className="absolute bottom-0 flex"
-          style={{ width: '200%', animation: 'wave-scroll 9s linear infinite' }}
-        >
-          {[0, 1].map((k) => (
-            <svg key={k} viewBox="0 0 1440 200" preserveAspectRatio="none"
-              className="flex-shrink-0" style={{ width: '50%', height: 200 }}>
-              <path
-                d="M0,120 C180,160 360,80 540,120 C720,160 900,80 1080,120 C1260,160 1440,80 1440,100 L1440,200 L0,200 Z"
-                fill="oklch(0.72 0.16 220 / 0.20)"
-              />
-            </svg>
-          ))}
-        </div>
-
-        {/* Onda 2 — meio, direção inversa */}
-        <div
-          className="absolute bottom-0 flex"
-          style={{ width: '200%', animation: 'wave-scroll 7s linear infinite reverse' }}
-        >
-          {[0, 1].map((k) => (
-            <svg key={k} viewBox="0 0 1440 180" preserveAspectRatio="none"
-              className="flex-shrink-0" style={{ width: '50%', height: 180 }}>
-              <path
-                d="M0,90 C200,130 400,50 600,90 C800,130 1000,50 1200,90 C1360,120 1440,70 1440,80 L1440,180 L0,180 Z"
-                fill="oklch(0.68 0.18 264 / 0.16)"
-              />
-            </svg>
-          ))}
-        </div>
-
-        {/* Onda 1 — frente, mais rápida */}
-        <div
-          className="absolute bottom-0 flex"
-          style={{ width: '200%', animation: 'wave-scroll 5s linear infinite' }}
-        >
-          {[0, 1].map((k) => (
-            <svg key={k} viewBox="0 0 1440 160" preserveAspectRatio="none"
-              className="flex-shrink-0" style={{ width: '50%', height: 160 }}>
-              <path
-                d="M0,70 C240,110 480,30 720,70 C960,110 1200,30 1440,55 L1440,160 L0,160 Z"
-                fill="oklch(0.66 0.20 162 / 0.14)"
-              />
-            </svg>
-          ))}
-        </div>
-      </div>
-
-      {/* Fade final para o branco */}
-      <div
-        aria-hidden
-        className="absolute bottom-0 left-0 right-0 h-10 pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, transparent, white)' }}
+        className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
+        style={{ background: 'linear-gradient(to bottom, transparent, var(--bg-base))' }}
       />
     </section>
   )

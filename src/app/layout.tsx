@@ -1,15 +1,25 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { Providers } from '@/components/layout/Providers'
 import { FloatingButtons } from '@/components/ui/FloatingButtons'
+import { Syne, DM_Sans } from 'next/font/google'
 import { SITE } from '@/constants/site'
 
-const inter = Inter({
+/** Fonte de display — títulos e headlines */
+const syne = Syne({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-display',
+  weight: ['400', '600', '700', '800'],
+  display: 'swap',
+})
+
+/** Fonte de corpo — parágrafos, UI, labels */
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-body',
+  weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
 })
 
@@ -32,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-BR" className={inter.variable}>
+    <html lang="pt-BR" className={`${syne.variable} ${dmSans.variable}`}>
       <body>
         <Providers>
           <Navbar />
