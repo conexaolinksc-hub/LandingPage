@@ -2,6 +2,8 @@
 
 import { contactSchema, type ContactSchema } from '@/validators/contactValidator'
 import type { ContactApiResponse } from '@/types/contact'
+import { resend, EMAIL_FROM, buildLeadEmail } from '@/lib/email'
+import { SITE } from '@/constants/site'
 
 export async function submitContactForm(
   data: ContactSchema
@@ -12,15 +14,27 @@ export async function submitContactForm(
       return { success: false, message: 'Dados inválidos. Verifique os campos.' }
     }
 
-    // TODO: Integrar com provedor de e-mail (Resend, SendGrid, etc.)
-    // TODO: Integrar com CRM (HubSpot, RD Station, etc.)
+    const { nome, email, telefone, interesse, mensagem } = parsed.data
+
+    const { error } = await resend.emails.send({
+      from: EMAIL_FROM,
+      to: [...SITE.notifyEmails],   // contato@conecaolinkes.com.br + jullianaqoliveira@gmail.com
+      replyTo: email,
+      subject: `[ConexãoLink] Nova proposta de ${nome}`,
+      html: buildLeadEmail({ nome, email, telefone, interesse, mensagem }),
+    })
+
+    if (error) {
+      console.error('[ContactService] Resend error:', error)
+      return { success: false, message: 'Não foi possível enviar. Tente novamente.' }
+    }
 
     return {
       success: true,
       message: 'Mensagem enviada! Entraremos em contato em breve.',
     }
-  } catch (error) {
-    console.error('[ContactService] Error:', error)
+  } catch (err) {
+    console.error('[ContactService] Unexpected error:', err)
     return { success: false, message: 'Erro interno. Tente novamente.' }
   }
 }

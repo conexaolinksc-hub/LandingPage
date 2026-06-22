@@ -7,4 +7,9 @@ export const SITE = {
   phone: '(00) 0000-0000',
   whatsapp: '5500000000000',
   instagram: 'https://instagram.com/conexaolink',
+  /** E-mails que receberão cada nova solicitação de proposta */
+  notifyEmails: [
+    'contato@conecaolinkes.com.br',
+    'jullianaqoliveira@gmail.com',
+  ],
 } as const
