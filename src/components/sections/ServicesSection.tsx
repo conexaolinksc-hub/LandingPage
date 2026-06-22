@@ -20,7 +20,7 @@ const SERVICES = [
     id: 'srv-empresarial',
     badge: 'Plano Empresarial',
     badgeClass: 'bg-brand-green/10 text-brand-green border-brand-green/25',
-    image: '/service-empresarial.png',
+    image: '/service-empresarial.webp',
     imageAlt: 'Internet empresarial para escritórios e comércios',
     title: 'Internet para Empresas',
     description:
