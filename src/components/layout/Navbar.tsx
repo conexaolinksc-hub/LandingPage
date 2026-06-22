@@ -3,16 +3,60 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Menu, X } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { Menu, X, Layers, Building2, Zap, MessageCircle } from 'lucide-react'
+import { motion, AnimatePresence, type Variants } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { useUIStore } from '@/store/uiStore'
 import { NAV_LINKS } from '@/constants/navigation'
 import { cn } from '@/lib/utils'
 
+/* Items exclusivos do menu mobile — mais detalhados */
+const MOBILE_ITEMS = [
+  {
+    label: 'Nossos Serviços',
+    href: '#servicos',
+    icon: Layers,
+    description: 'Veja todas as soluções',
+  },
+  {
+    label: 'Plano Empresarial',
+    href: '#srv-empresarial',
+    icon: Building2,
+    description: 'Para escritórios e comércios',
+  },
+  {
+    label: 'Link Dedicado',
+    href: '#srv-dedicado',
+    icon: Zap,
+    description: 'Banda exclusiva com SLA',
+  },
+  {
+    label: 'Fale Conosco',
+    href: '#contato',
+    icon: MessageCircle,
+    description: 'Solicite uma proposta',
+  },
+]
+
+const menuVariants: Variants = {
+  hidden: { opacity: 0, y: -8 },
+  visible: { opacity: 1, y: 0 },
+  exit:   { opacity: 0, y: -8 },
+}
+
+const itemVariants: Variants = {
+  hidden:  { opacity: 0, x: -12 },
+  visible: (i: number) => ({ opacity: 1, x: 0 }),
+}
+
 export function Navbar() {
-  const { isNavScrolled, isMobileMenuOpen, setNavScrolled, toggleMobileMenu, closeMobileMenu } =
-    useUIStore()
+  const {
+    isNavScrolled,
+    isMobileMenuOpen,
+    setNavScrolled,
+    toggleMobileMenu,
+    closeMobileMenu,
+  } = useUIStore()
 
   useEffect(() => {
     const handleScroll = () => setNavScrolled(window.scrollY > 20)
@@ -20,10 +64,16 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [setNavScrolled])
 
+  // Close menu on resize to desktop
+  useEffect(() => {
+    const handleResize = () => { if (window.innerWidth >= 768) closeMobileMenu() }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [closeMobileMenu])
+
   const handleNavClick = (href: string) => {
     closeMobileMenu()
-    const el = document.querySelector(href)
-    el?.scrollIntoView({ behavior: 'smooth' })
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
@@ -63,7 +113,7 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* CTA */}
+        {/* Desktop CTA */}
         <Button
           className="hidden md:inline-flex gradient-brand text-white font-semibold shadow-md shadow-brand-blue/20 hover:opacity-90 transition-opacity border-0"
           onClick={() => handleNavClick('#contato')}
@@ -74,40 +124,80 @@ export function Navbar() {
 
         {/* Hamburger */}
         <button
-          className="md:hidden ml-auto p-2 text-foreground"
+          className={cn(
+            'md:hidden ml-auto p-2 rounded-lg transition-colors',
+            isMobileMenuOpen
+              ? 'bg-black/8 text-foreground'
+              : 'text-foreground hover:bg-black/5'
+          )}
           onClick={toggleMobileMenu}
-          aria-label="Menu"
+          aria-label={isMobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+          aria-expanded={isMobileMenuOpen}
           id="hamburger"
         >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          <motion.div
+            animate={{ rotate: isMobileMenuOpen ? 90 : 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          </motion.div>
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* ── Mobile Menu Panel ── */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden bg-white/95 backdrop-blur-lg border-t border-black/8 px-6 py-6 flex flex-col gap-5 shadow-lg"
+            variants={menuVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="md:hidden"
           >
-            {NAV_LINKS.map((link) => (
-              <button
-                key={link.href}
-                onClick={() => handleNavClick(link.href)}
-                className="text-left text-base font-medium text-foreground/70 hover:text-foreground transition-colors"
-              >
-                {link.label}
-              </button>
-            ))}
-            <Button
-              className="gradient-brand text-white font-semibold border-0 mt-2"
-              onClick={() => handleNavClick('#contato')}
-            >
-              Fale Conosco
-            </Button>
+            <div className="bg-white/98 backdrop-blur-xl border-t border-black/6 shadow-xl">
+              {/* Nav items */}
+              <nav className="px-4 pt-4 pb-2" aria-label="Menu mobile">
+                {MOBILE_ITEMS.map((item, i) => {
+                  const Icon = item.icon
+                  return (
+                    <motion.button
+                      key={item.href}
+                      custom={i}
+                      variants={itemVariants}
+                      initial="hidden"
+                      animate="visible"
+                      onClick={() => handleNavClick(item.href)}
+                      className="w-full flex items-center gap-4 px-3 py-3.5 rounded-xl hover:bg-bg-surface active:bg-bg-surface/80 transition-colors group text-left"
+                    >
+                      {/* Icon badge */}
+                      <span className="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br from-brand-blue/10 to-brand-green/8 border border-brand-blue/12 flex items-center justify-center group-hover:from-brand-blue/18 transition-all">
+                        <Icon size={18} className="text-brand-blue" />
+                      </span>
+                      {/* Text */}
+                      <span className="flex flex-col">
+                        <span className="text-sm font-semibold text-foreground leading-tight">
+                          {item.label}
+                        </span>
+                        <span className="text-xs text-muted-foreground mt-0.5">
+                          {item.description}
+                        </span>
+                      </span>
+                    </motion.button>
+                  )
+                })}
+              </nav>
+
+              {/* Bottom CTA */}
+              <div className="px-4 pb-5 pt-2 border-t border-black/5 mt-1">
+                <Button
+                  className="gradient-brand text-white font-semibold border-0 w-full shadow-md shadow-brand-blue/20 hover:opacity-90 transition-opacity"
+                  onClick={() => handleNavClick('#contato')}
+                  id="mobile-cta"
+                >
+                  Solicitar Proposta Agora
+                </Button>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

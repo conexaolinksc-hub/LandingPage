@@ -4,7 +4,7 @@ import './globals.css'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { Providers } from '@/components/layout/Providers'
-import { WhatsAppButton } from '@/components/ui/WhatsAppButton'
+import { FloatingButtons } from '@/components/ui/FloatingButtons'
 import { SITE } from '@/constants/site'
 
 const inter = Inter({
@@ -38,7 +38,7 @@ export default function RootLayout({
           <Navbar />
           <main>{children}</main>
           <Footer />
-          <WhatsAppButton />
+          <FloatingButtons />
         </Providers>
       </body>
     </html>

@@ -6,4 +6,5 @@ export const SITE = {
   email: 'contato@conexaolink.com.br',
   phone: '(00) 0000-0000',
   whatsapp: '5500000000000',
+  instagram: 'https://instagram.com/conexaolink',
 } as const
