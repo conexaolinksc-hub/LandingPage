@@ -43,7 +43,7 @@ const SERVICES = [
     id: 'srv-dedicado',
     badge: 'Link Dedicado',
     badgeClass: 'bg-brand-blue/10 text-brand-blue border-brand-blue/20',
-    image: '/service-link-dedicado.png',
+    image: '/service-link-dedicado.webp',
     imageAlt: 'Link dedicado exclusivo para operações críticas',
     title: 'Link Dedicado',
     description:
