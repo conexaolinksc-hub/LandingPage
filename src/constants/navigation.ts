@@ -1,4 +1,4 @@
 export const NAV_LINKS = [
-  { label: 'Link Dedicado', href: '#link-dedicado' },
+  { label: 'Serviços', href: '#servicos' },
   { label: 'Contato', href: '#contato' },
 ] as const
