@@ -145,7 +145,7 @@ export function HeroSection() {
         {/* Sub */}
         <motion.p
           variants={fadeUpItem}
-          className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 max-w-xl"
+          className="text-lg md:text-xl text-foreground/75 leading-relaxed mb-10 max-w-xl"
         >
           Soluções empresariais e link dedicado com SLA garantido.
           Estabilidade que a sua operação exige.
