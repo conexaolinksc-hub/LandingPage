@@ -22,18 +22,18 @@ export function ParticleNetwork() {
     let animId: number
     let particles: Particle[] = []
 
-    const MAX_DIST = 160
+    const MAX_DIST = 150
 
     const init = () => {
       canvas.width  = canvas.offsetWidth
       canvas.height = canvas.offsetHeight
-      const count = Math.max(45, Math.floor((canvas.width * canvas.height) / 14000))
+      const count = Math.max(38, Math.floor((canvas.width * canvas.height) / 17000))
       particles = Array.from({ length: count }, () => ({
         x:  Math.random() * canvas.width,
         y:  Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        r:  Math.random() * 2.0 + 1.0,
+        vx: (Math.random() - 0.5) * 0.38,
+        vy: (Math.random() - 0.5) * 0.38,
+        r:  Math.random() * 1.4 + 0.8,
       }))
     }
 
@@ -50,7 +50,7 @@ export function ParticleNetwork() {
         // Dot
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = 'rgba(37, 99, 235, 0.55)'
+        ctx.fillStyle = 'rgba(37, 99, 235, 0.40)'
         ctx.fill()
       }
 
@@ -61,12 +61,12 @@ export function ParticleNetwork() {
           const dy   = particles[i].y - particles[j].y
           const dist = Math.sqrt(dx * dx + dy * dy)
           if (dist < MAX_DIST) {
-            const alpha = (1 - dist / MAX_DIST) * 0.40
+            const alpha = (1 - dist / MAX_DIST) * 0.26
             ctx.beginPath()
             ctx.moveTo(particles[i].x, particles[i].y)
             ctx.lineTo(particles[j].x, particles[j].y)
             ctx.strokeStyle = `rgba(37, 99, 235, ${alpha})`
-            ctx.lineWidth = 1.0
+            ctx.lineWidth = 0.8
             ctx.stroke()
           }
         }

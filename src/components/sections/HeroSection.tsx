@@ -11,28 +11,28 @@ import { scrollToSection } from '@/utils/scroll'
 /* Animated blob data */
 const blobs = [
   {
-    style: { top: '-15%', right: '-10%', width: 820, height: 820 },
-    color: 'oklch(0.68 0.22 264)',
-    animate: { y: [0, -35, 0], x: [0, 22, 0], scale: [1, 1.07, 1] },
+    style: { top: '-12%', right: '-8%', width: 720, height: 720 },
+    color: 'oklch(0.68 0.20 264)',
+    animate: { y: [0, -30, 0], x: [0, 18, 0], scale: [1, 1.06, 1] },
     duration: 10,
   },
   {
-    style: { bottom: '-20%', left: '-12%', width: 700, height: 700 },
-    color: 'oklch(0.66 0.22 162)',
-    animate: { y: [0, 32, 0], x: [0, -20, 0], scale: [1, 0.93, 1] },
+    style: { bottom: '-18%', left: '-10%', width: 620, height: 620 },
+    color: 'oklch(0.66 0.20 162)',
+    animate: { y: [0, 28, 0], x: [0, -16, 0], scale: [1, 0.94, 1] },
     duration: 13,
   },
   {
-    style: { top: '25%', left: '30%', width: 540, height: 540 },
-    color: 'oklch(0.72 0.18 220)',
-    animate: { y: [0, -25, 0], x: [0, 28, 0], scale: [1, 1.10, 1] },
+    style: { top: '28%', left: '32%', width: 470, height: 470 },
+    color: 'oklch(0.72 0.16 220)',
+    animate: { y: [0, -22, 0], x: [0, 24, 0], scale: [1, 1.08, 1] },
     duration: 11,
     delay: 1.5,
   },
   {
-    style: { top: '-8%', left: '12%', width: 380, height: 380 },
-    color: 'oklch(0.76 0.18 290)',
-    animate: { y: [0, 26, 0], scale: [1, 0.91, 1] },
+    style: { top: '-6%', left: '13%', width: 330, height: 330 },
+    color: 'oklch(0.76 0.16 290)',
+    animate: { y: [0, 22, 0], scale: [1, 0.92, 1] },
     duration: 9,
     delay: 2,
   },
@@ -45,7 +45,7 @@ export function HeroSection() {
     <section
       id="home"
       className="relative min-h-[92vh] flex items-center overflow-hidden"
-      style={{ background: 'oklch(0.97 0.012 264)' }}
+      style={{ background: 'oklch(0.985 0.006 264)' }}
     >
       {/* ── Animated blobs ── */}
       {blobs.map((blob, i) => (
@@ -56,8 +56,8 @@ export function HeroSection() {
           style={{
             ...blob.style,
             background: blob.color,
-            filter: 'blur(80px)',
-            opacity: 0.32,
+            filter: 'blur(85px)',
+            opacity: 0.22,
           }}
           animate={blob.animate}
           transition={{
@@ -75,8 +75,8 @@ export function HeroSection() {
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            'radial-gradient(circle, oklch(0.50 0.14 264 / 0.20) 1.5px, transparent 1.5px)',
-          backgroundSize: '30px 30px',
+            'radial-gradient(circle, oklch(0.50 0.12 264 / 0.14) 1px, transparent 1px)',
+          backgroundSize: '33px 33px',
         }}
       />
 
@@ -93,10 +93,10 @@ export function HeroSection() {
           animate={{ rotate: 360 }}
           transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
           style={{
-            width: 360,
-            height: 360,
+            width: 340,
+            height: 340,
             borderRadius: '50%',
-            border: '2px solid oklch(0.55 0.20 264 / 0.35)',
+            border: '1.5px solid oklch(0.55 0.18 264 / 0.22)',
           }}
         />
         <motion.div
@@ -106,7 +106,7 @@ export function HeroSection() {
             position: 'absolute',
             inset: 36,
             borderRadius: '50%',
-            border: '2px solid oklch(0.55 0.18 162 / 0.35)',
+            border: '1.5px solid oklch(0.55 0.16 162 / 0.24)',
           }}
         />
         <div
@@ -114,7 +114,7 @@ export function HeroSection() {
             position: 'absolute',
             inset: 76,
             borderRadius: '50%',
-            border: '2px solid oklch(0.60 0.16 220 / 0.40)',
+            border: '1.5px solid oklch(0.60 0.14 220 / 0.28)',
           }}
         />
       </div>
