@@ -1,14 +1,14 @@
 'use client'
 
+import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Zap } from 'lucide-react'
+
 import { Button } from '@/components/ui/button'
 import { ParticleNetwork } from '@/components/ui/ParticleNetwork'
 import { fadeUpContainer, fadeUpItem } from '@/lib/animations'
 import { scrollToSection } from '@/utils/scroll'
 
-
-/* Animated blob data */
+/* Blobs animados */
 const blobs = [
   {
     style: { top: '-12%', right: '-8%', width: 720, height: 720 },
@@ -29,25 +29,16 @@ const blobs = [
     duration: 11,
     delay: 1.5,
   },
-  {
-    style: { top: '-6%', left: '13%', width: 330, height: 330 },
-    color: 'oklch(0.76 0.16 290)',
-    animate: { y: [0, 22, 0], scale: [1, 0.92, 1] },
-    duration: 9,
-    delay: 2,
-  },
 ]
 
 export function HeroSection() {
-  const scrollTo = (id: string) => scrollToSection(id)
-
   return (
     <section
       id="home"
       className="relative min-h-[92vh] flex items-center overflow-hidden"
       style={{ background: 'oklch(0.985 0.006 264)' }}
     >
-      {/* ── Animated blobs ── */}
+      {/* ── Blobs ── */}
       {blobs.map((blob, i) => (
         <motion.div
           key={i}
@@ -62,7 +53,7 @@ export function HeroSection() {
           animate={blob.animate}
           transition={{
             duration: blob.duration,
-            delay: blob.delay ?? 0,
+            delay: (blob as { delay?: number }).delay ?? 0,
             repeat: Infinity,
             ease: 'easeInOut',
           }}
@@ -75,105 +66,85 @@ export function HeroSection() {
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            'radial-gradient(circle, oklch(0.50 0.12 264 / 0.14) 1px, transparent 1px)',
+            'radial-gradient(circle, oklch(0.50 0.12 264 / 0.12) 1px, transparent 1px)',
           backgroundSize: '33px 33px',
         }}
       />
 
-      {/* ── Particle network ── */}
+      {/* ── Partículas ── */}
       <ParticleNetwork />
 
-      {/* ── Decorative rings ── */}
+      {/* ── Fachada discreta (lado direito) ── */}
       <div
         aria-hidden
-        className="pointer-events-none absolute"
-        style={{ right: '6%', top: '18%' }}
+        className="hidden lg:block absolute right-0 top-0 bottom-0 w-[52%] pointer-events-none"
+        style={{
+          maskImage: 'linear-gradient(to right, transparent 0%, black 35%, black 85%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 35%, black 85%, transparent 100%)',
+        }}
       >
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
-          style={{
-            width: 340,
-            height: 340,
-            borderRadius: '50%',
-            border: '1.5px solid oklch(0.55 0.18 264 / 0.22)',
-          }}
-        />
-        <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-          style={{
-            position: 'absolute',
-            inset: 36,
-            borderRadius: '50%',
-            border: '1.5px solid oklch(0.55 0.16 162 / 0.24)',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            inset: 76,
-            borderRadius: '50%',
-            border: '1.5px solid oklch(0.60 0.14 220 / 0.28)',
-          }}
+        <Image
+          src="/fachada.webp"
+          alt="Fachada ConexãoLink"
+          fill
+          className="object-cover object-center"
+          style={{ opacity: 0.18 }}
+          sizes="52vw"
+          priority
         />
       </div>
 
+      {/* ── Conteúdo (esquerda) ── */}
       <motion.div
-        className="container mx-auto px-6 relative z-10 pt-28 pb-16 max-w-3xl"
+        className="container mx-auto px-6 relative z-10 pt-28 pb-16"
         variants={fadeUpContainer}
         initial="hidden"
         animate="visible"
       >
-        {/* Badge */}
-        <motion.div variants={fadeUpItem}>
-          <span className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-black/8 shadow-sm rounded-full px-4 py-2 text-sm font-medium text-foreground/70 mb-8">
-            <Zap size={14} className="text-brand-green" />
-            Internet de verdade para quem não pode parar
-          </span>
-        </motion.div>
+        <div className="max-w-xl">
 
-        {/* Headline */}
-        <motion.h1
-          variants={fadeUpItem}
-          className="text-5xl md:text-7xl font-black leading-[1.04] tracking-tight mb-6 text-foreground"
-        >
-          Conectividade que{' '}
-          <span className="gradient-text">impulsiona negócios</span>
-        </motion.h1>
-
-        {/* Sub */}
-        <motion.p
-          variants={fadeUpItem}
-          className="text-lg md:text-xl text-foreground/75 leading-relaxed mb-10 max-w-xl"
-        >
-          Soluções empresariais e link dedicado com SLA garantido.
-          Estabilidade que a sua operação exige.
-        </motion.p>
-
-        {/* CTAs */}
-        <motion.div variants={fadeUpItem} className="flex flex-wrap gap-4">
-          <Button
-            size="lg"
-            className="gradient-brand text-white font-semibold text-base px-8 shadow-lg shadow-brand-blue/20 hover:opacity-90 transition-opacity border-0"
-            onClick={() => scrollTo('#servicos')}
-            id="hero-cta-solutions"
+          {/* Headline */}
+          <motion.h1
+            variants={fadeUpItem}
+            className="text-5xl md:text-7xl font-black leading-[1.04] tracking-tight mb-6 text-foreground"
           >
-            Nossos Serviços
-          </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            className="text-foreground border-black/15 bg-white/70 backdrop-blur-sm hover:bg-bg-surface hover:border-brand-blue hover:text-brand-blue transition-all text-base px-8 shadow-sm"
-            onClick={() => scrollTo('#contato')}
-            id="hero-cta-contact"
+            Conectividade que{' '}
+            <span className="gradient-text">impulsiona negócios</span>
+          </motion.h1>
+
+          {/* Subtítulo */}
+          <motion.p
+            variants={fadeUpItem}
+            className="text-lg md:text-xl text-foreground/75 leading-relaxed mb-10"
           >
-            Solicitar Proposta
-          </Button>
-        </motion.div>
+            Soluções empresariais e link dedicado com SLA garantido.
+            Estabilidade que a sua operação exige.
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div variants={fadeUpItem} className="flex flex-wrap gap-4">
+            <Button
+              size="lg"
+              className="gradient-brand text-white font-semibold text-base px-8 shadow-lg shadow-brand-blue/20 hover:opacity-90 transition-opacity border-0"
+              onClick={() => scrollToSection('#servicos')}
+              id="hero-cta-solutions"
+            >
+              Nossos Serviços
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="text-foreground border-black/15 bg-white/70 backdrop-blur-sm hover:bg-bg-surface hover:border-brand-blue hover:text-brand-blue transition-all text-base px-8 shadow-sm"
+              onClick={() => scrollToSection('#contato')}
+              id="hero-cta-contact"
+            >
+              Solicitar Proposta
+            </Button>
+          </motion.div>
+        </div>
       </motion.div>
 
-      {/* ── Bottom fade ── */}
+      {/* ── Fade inferior ── */}
       <div
         aria-hidden
         className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
