@@ -15,7 +15,7 @@ export const SITE = {
   },
   /** E-mails que receberão cada nova solicitação de proposta */
   notifyEmails: [
-    'contato@conecaolinkes.com.br',
+    'contato@conexaolinkes.com.br',
     'jullianaqoliveira@gmail.com',
   ],
 } as const

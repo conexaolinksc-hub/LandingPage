@@ -35,8 +35,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-[92vh] flex items-center overflow-hidden"
-      style={{ background: 'oklch(0.985 0.006 264)' }}
+      className="relative min-h-[92vh] flex items-center overflow-hidden bg-bg-base"
     >
       {/* ── Blobs ── */}
       {blobs.map((blob, i) => (
@@ -49,6 +48,7 @@ export function HeroSection() {
             background: blob.color,
             filter: 'blur(85px)',
             opacity: 0.22,
+            willChange: 'transform',
           }}
           animate={blob.animate}
           transition={{

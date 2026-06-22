@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { IconBadge } from '@/components/ui/IconBadge'
 import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 import { STATS } from '@/constants/content'
 
@@ -27,12 +28,7 @@ export function StatsSection() {
                 transition={{ duration: 0.5, delay: i * 0.1, ease: 'easeOut' }}
                 className="group flex flex-col items-center text-center p-6 rounded-xl border border-border bg-bg-base hover:border-brand-blue/40 hover:bg-brand-blue/5 hover:shadow-md transition-all duration-300 cursor-default"
               >
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-gradient-to-br from-brand-blue/10 to-brand-green/8 border border-brand-blue/15 group-hover:from-brand-blue/18 group-hover:border-brand-blue/30 transition-all shadow-sm">
-                  <Icon
-                    size={22}
-                    className="text-brand-blue group-hover:text-brand-blue-light transition-colors"
-                  />
-                </div>
+                <IconBadge icon={Icon} containerSize="lg" />
                 <h3 className="text-2xl font-black gradient-text mb-1">{stat.value}</h3>
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider leading-tight">
                   {stat.label}

@@ -7,6 +7,9 @@ export function useSmoothScroll() {
   const lenisRef = useRef<Lenis | null>(null)
 
   useEffect(() => {
+    // Respect OS motion preference — fall back to native scroll
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

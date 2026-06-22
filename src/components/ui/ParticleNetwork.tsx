@@ -14,6 +14,9 @@ export function ParticleNetwork() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
+    // Respect user's OS motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')

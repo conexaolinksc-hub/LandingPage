@@ -1,9 +1,13 @@
 'use server'
 
 import { contactSchema, type ContactSchema } from '@/validators/contactValidator'
-import type { ContactApiResponse } from '@/types/contact'
 import { resend, EMAIL_FROM, buildLeadEmail } from '@/lib/email'
 import { SITE } from '@/constants/site'
+
+export interface ContactApiResponse {
+  success: boolean
+  message: string
+}
 
 export async function submitContactForm(
   data: ContactSchema
