@@ -79,8 +79,8 @@ export function HeroSection() {
         aria-hidden
         className="hidden lg:block absolute right-0 top-0 bottom-0 w-[52%] pointer-events-none"
         style={{
-          maskImage: 'linear-gradient(to right, transparent 0%, black 35%, black 85%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 35%, black 85%, transparent 100%)',
+          maskImage: 'linear-gradient(to right, transparent 0%, black 20%, black 90%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 20%, black 90%, transparent 100%)',
         }}
       >
         <Image
@@ -88,7 +88,7 @@ export function HeroSection() {
           alt="Fachada ConexãoLink"
           fill
           className="object-cover object-center"
-          style={{ opacity: 0.18 }}
+          style={{ opacity: 0.45 }}
           sizes="52vw"
           priority
         />
