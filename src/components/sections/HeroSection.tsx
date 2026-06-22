@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 import { Button } from '@/components/ui/button'
-import { ParticleNetwork } from '@/components/ui/ParticleNetwork'
 import { fadeUpContainer, fadeUpItem } from '@/lib/animations'
 import { scrollToSection } from '@/utils/scroll'
 
@@ -70,9 +69,6 @@ export function HeroSection() {
           backgroundSize: '33px 33px',
         }}
       />
-
-      {/* ── Partículas ── */}
-      <ParticleNetwork />
 
       {/* ── Fachada mobile: fundo com overlay branco 90% ── */}
       <div aria-hidden className="block lg:hidden absolute inset-0 pointer-events-none z-0">
