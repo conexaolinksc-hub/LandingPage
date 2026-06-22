@@ -3,6 +3,7 @@
 import { motion, type Variants } from 'framer-motion'
 import { Zap } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { ParticleNetwork } from '@/components/ui/ParticleNetwork'
 
 const container: Variants = {
   hidden: {},
@@ -62,7 +63,7 @@ export function HeroSection() {
             ...blob.style,
             background: blob.color,
             filter: 'blur(90px)',
-            opacity: 0.22,
+            opacity: 0.17,
           }}
           animate={blob.animate}
           transition={{
@@ -74,7 +75,7 @@ export function HeroSection() {
         />
       ))}
 
-      {/* ── Subtle dot grid overlay ── */}
+      {/* ── Dot grid ── */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -84,6 +85,9 @@ export function HeroSection() {
           backgroundSize: '36px 36px',
         }}
       />
+
+      {/* ── Particle network ── */}
+      <ParticleNetwork />
 
       {/* ── Decorative rings ── */}
       <div
