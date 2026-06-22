@@ -84,24 +84,21 @@ export function HeroSection() {
         <div className="absolute inset-0" style={{ background: 'oklch(0.985 0.006 264 / 0.90)' }} />
       </div>
 
-      {/* ── Fachada desktop (lado direito) ── */}
+      {/* ── Fachada desktop: card emoldurado lado direito ── */}
       <div
         aria-hidden
-        className="hidden lg:block absolute right-0 top-0 bottom-0 w-[52%] pointer-events-none"
-        style={{
-          maskImage: 'linear-gradient(to right, transparent 0%, black 20%, black 90%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 20%, black 90%, transparent 100%)',
-        }}
+        className="hidden lg:flex absolute right-0 top-0 bottom-0 w-[48%] items-center justify-center pr-8 pointer-events-none z-0"
       >
-        <Image
-          src="/fachada.webp"
-          alt="Fachada ConexãoLink"
-          fill
-          className="object-cover object-center"
-          style={{ opacity: 0.65 }}
-          sizes="52vw"
-          priority
-        />
+        <div className="relative w-full h-[70%] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-black/8">
+          <Image
+            src="/fachada.webp"
+            alt="Fachada ConexãoLink"
+            fill
+            className="object-cover object-center"
+            sizes="48vw"
+            priority
+          />
+        </div>
       </div>
 
       {/* ── Conteúdo (esquerda) ── */}
