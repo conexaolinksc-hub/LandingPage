@@ -77,7 +77,7 @@ export function HeroSection() {
           alt=""
           fill
           className="object-cover object-center"
-          sizes="100vw"
+          sizes="(max-width: 1024px) 100vw, 50vw"
           priority
         />
         {/* Overlay branco forte para ser quase imperceptível */}
@@ -99,7 +99,7 @@ export function HeroSection() {
           fill
           className="object-cover object-center"
           style={{ opacity: 0.65 }}
-          sizes="52vw"
+          sizes="(min-width: 1024px) 52vw, 100vw"
           priority
         />
       </div>
