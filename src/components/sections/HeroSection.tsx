@@ -2,162 +2,117 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { Rocket, ChevronDown } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { fadeUpContainer, fadeUpItem } from '@/lib/animations'
 import { scrollToSection } from '@/utils/scroll'
 
-/* Blobs animados */
-const blobs = [
-  {
-    style: { top: '-12%', right: '-8%', width: 720, height: 720 },
-    color: 'oklch(0.68 0.20 264)',
-    animate: { y: [0, -30, 0], x: [0, 18, 0], scale: [1, 1.06, 1] },
-    duration: 10,
-  },
-  {
-    style: { bottom: '-18%', left: '-10%', width: 620, height: 620 },
-    color: 'oklch(0.66 0.20 162)',
-    animate: { y: [0, 28, 0], x: [0, -16, 0], scale: [1, 0.94, 1] },
-    duration: 13,
-  },
-  {
-    style: { top: '28%', left: '32%', width: 470, height: 470 },
-    color: 'oklch(0.72 0.16 220)',
-    animate: { y: [0, -22, 0], x: [0, 24, 0], scale: [1, 1.08, 1] },
-    duration: 11,
-    delay: 1.5,
-  },
-]
-
 export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-[92vh] flex items-center overflow-hidden bg-bg-base"
+      className="relative min-h-[100vh] flex items-center overflow-hidden"
     >
-      {/* ── Blobs ── */}
-      {blobs.map((blob, i) => (
-        <motion.div
-          key={i}
-          aria-hidden
-          className="pointer-events-none absolute rounded-full"
-          style={{
-            ...blob.style,
-            background: blob.color,
-            filter: 'blur(85px)',
-            opacity: 0.22,
-            willChange: 'transform',
-          }}
-          animate={blob.animate}
-          transition={{
-            duration: blob.duration,
-            delay: (blob as { delay?: number }).delay ?? 0,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-      ))}
-
-      {/* ── Dot grid ── */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage:
-            'radial-gradient(circle, oklch(0.50 0.12 264 / 0.12) 1px, transparent 1px)',
-          backgroundSize: '33px 33px',
-        }}
-      />
-
-      {/* ── Fachada mobile: fundo com overlay branco 90% ── */}
-      <div aria-hidden className="block lg:hidden absolute inset-0 pointer-events-none z-0">
-        <Image
-          src="/fachada.webp"
-          alt=""
-          fill
-          className="object-cover object-center"
-          sizes="100vw"
-          priority
-        />
-        {/* Overlay branco forte para ser quase imperceptível */}
-        <div className="absolute inset-0" style={{ background: 'oklch(0.985 0.006 264 / 0.90)' }} />
-      </div>
-
-      {/* ── Fachada desktop (lado direito) ── */}
-      <div
-        aria-hidden
-        className="hidden lg:block absolute right-0 top-0 bottom-0 w-[52%] pointer-events-none"
-        style={{
-          maskImage: 'linear-gradient(to right, transparent 0%, black 20%, black 90%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 20%, black 90%, transparent 100%)',
-        }}
-      >
+      {/* ── Background Image Full Bleed ── */}
+      <div aria-hidden className="absolute inset-0 pointer-events-none z-0">
         <Image
           src="/fachada.webp"
           alt="Fachada ConexãoLink"
           fill
           className="object-cover object-center"
-          style={{ opacity: 0.65 }}
-          sizes="52vw"
+          sizes="100vw"
           priority
+          quality={90}
         />
+        {/* Dark Premium Overlay */}
+        <div className="absolute inset-0 bg-slate-950/80" />
+        
+        {/* Brand color subtle gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/30 to-transparent mix-blend-overlay" />
       </div>
 
-      {/* ── Conteúdo (esquerda) ── */}
+      {/* ── Conteúdo Centralizado ── */}
       <motion.div
-        className="container mx-auto px-6 relative z-10 pt-28 pb-16"
+        className="container mx-auto px-6 relative z-10 pt-32 pb-24 flex flex-col items-center text-center"
         variants={fadeUpContainer}
         initial="hidden"
         animate="visible"
       >
-        <div className="max-w-xl">
+        <div className="max-w-3xl flex flex-col items-center">
+          
+          {/* Badge Luminosa */}
+          <motion.div variants={fadeUpItem} className="mb-8">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-white/90 text-sm font-semibold tracking-wide uppercase shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+              <Rocket size={16} className="text-brand-green-light" />
+              Internet 100% Fibra Óptica
+            </span>
+          </motion.div>
 
           {/* Headline */}
           <motion.h1
             variants={fadeUpItem}
-            className="text-5xl md:text-7xl font-black leading-[1.04] tracking-tight mb-6 text-foreground"
+            className="text-5xl md:text-7xl font-black leading-[1.05] tracking-tight mb-6 text-white drop-shadow-lg"
           >
             Conectividade que{' '}
-            <span className="gradient-text">impulsiona negócios</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue-light via-white to-brand-green-light filter drop-shadow-sm">
+              impulsiona negócios
+            </span>
           </motion.h1>
 
           {/* Subtítulo */}
           <motion.p
             variants={fadeUpItem}
-            className="text-lg md:text-xl text-foreground/75 leading-relaxed mb-10"
+            className="text-lg md:text-xl text-white/80 leading-relaxed mb-10 max-w-2xl font-light drop-shadow-md"
           >
             Soluções empresariais e link dedicado com SLA garantido.
-            Estabilidade que a sua operação exige.
+            A estabilidade e alta performance que a sua operação exige para nunca parar.
           </motion.p>
 
           {/* CTAs */}
-          <motion.div variants={fadeUpItem} className="flex flex-wrap gap-4">
+          <motion.div variants={fadeUpItem} className="flex flex-col sm:flex-row flex-wrap justify-center gap-5 w-full sm:w-auto">
             <Button
               size="lg"
-              className="gradient-brand text-white font-semibold text-base px-8 shadow-lg shadow-brand-blue/20 hover:opacity-90 transition-opacity border-0"
+              className="gradient-brand text-white font-bold text-base px-8 py-6 rounded-xl shadow-[0_0_30px_-5px_rgba(0,112,240,0.5)] hover:shadow-[0_0_40px_-5px_rgba(0,112,240,0.7)] hover:scale-105 transition-all duration-300 border border-white/10"
               onClick={() => scrollToSection('#servicos')}
               id="hero-cta-solutions"
             >
-              Nossos Serviços
+              Conheça os Planos
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="text-foreground border-black/15 bg-white/70 backdrop-blur-sm hover:bg-bg-surface hover:border-brand-blue hover:text-brand-blue transition-all text-base px-8 shadow-sm"
+              className="text-white border-white/20 bg-white/5 backdrop-blur-md hover:bg-white/15 transition-all duration-300 text-base px-8 py-6 rounded-xl shadow-lg"
               onClick={() => scrollToSection('#contato')}
               id="hero-cta-contact"
             >
-              Solicitar Proposta
+              Falar com Consultor
             </Button>
           </motion.div>
         </div>
       </motion.div>
 
-      {/* ── Fade inferior ── */}
+      {/* ── Indicador de Scroll ── */}
+      <motion.div
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 cursor-pointer text-white/60 hover:text-white transition-colors"
+        onClick={() => scrollToSection('#servicos')}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1, duration: 1 }}
+      >
+        <span className="text-xs uppercase tracking-widest font-semibold">Role para descobrir</span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+        >
+          <ChevronDown size={24} />
+        </motion.div>
+      </motion.div>
+
+      {/* ── Fade inferior para transição suave com a próxima seção ── */}
       <div
         aria-hidden
-        className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
+        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-0"
         style={{ background: 'linear-gradient(to bottom, transparent, var(--bg-base))' }}
       />
     </section>
