@@ -47,11 +47,11 @@ const SERVICES = [
     imageAlt: 'Link dedicado exclusivo para operações críticas',
     title: 'Link Dedicado',
     description:
-      'Banda 100% exclusiva sem compartilhamento. IP fixo, SLA garantido e suporte técnico prioritário com reparo em até 5 horas.',
+      'Banda 100% exclusiva sem compartilhamento. IP fixo, SLA garantido e suporte técnico prioritário com reparo em até 5-24h.',
     features: [
       'Banda 100% exclusiva',
       'IP fixo para câmeras e sistemas',
-      'Reparo em até 5 horas',
+      'Reparo em até 5-24h',
       'Suporte técnico prioritário 24h',
     ],
     ctaLabel: 'Solicitar Cotação',
