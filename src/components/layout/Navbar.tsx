@@ -19,15 +19,15 @@ const ICON_MAP: Record<string, LucideIcon> = {
 }
 
 const menuVariants: Variants = {
-  hidden:  { opacity: 0, y: -8 },
-  visible: { opacity: 1, y: 0 },
-  exit:    { opacity: 0, y: -8 },
+  hidden:  { opacity: 0, y: -8, scale: 0.98 },
+  visible: { opacity: 1, y: 0, scale: 1 },
+  exit:    { opacity: 0, y: -8, scale: 0.98 },
 }
 
 /** Staggered slide-in for each mobile menu item */
 const itemVariants: Variants = {
   hidden:  { opacity: 0, x: -12 },
-  visible: (i: number) => ({ opacity: 1, x: 0, transition: { delay: i * 0.06 } }),
+  visible: (i: number) => ({ opacity: 1, x: 0, transition: { delay: i * 0.05 } }),
 }
 
 export function Navbar() {
@@ -67,55 +67,62 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        isNavScrolled
-          ? 'bg-white/90 backdrop-blur-lg border-b border-black/8 shadow-sm py-3'
-          : 'bg-transparent py-5',
+        'fixed left-0 right-0 z-50 flex justify-center transition-all duration-500 px-4 sm:px-6',
+        isNavScrolled ? 'top-4' : 'top-6'
       )}
       id="navbar"
     >
-      <div className="container mx-auto px-6 flex items-center gap-8">
-        {/* Logo */}
-        <Link href="/" className="flex-shrink-0" onClick={closeMobileMenu}>
+      <div 
+        className={cn(
+          'w-full max-w-5xl flex items-center justify-between px-6 transition-all duration-500',
+          isNavScrolled 
+            ? 'bg-white/80 backdrop-blur-lg shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-black/5 py-3 rounded-full' 
+            : 'bg-transparent py-2 rounded-full'
+        )}
+      >
+        {/* Logo (Esquerda) */}
+        <Link href="/" className="flex-shrink-0 z-10" onClick={closeMobileMenu}>
           <Image
             src="/logo.png"
             alt="ConexãoLink"
             width={160}
             height={50}
-            className="h-11 w-auto object-contain"
+            className="h-10 md:h-11 w-auto object-contain transition-transform hover:scale-105"
             sizes="160px"
             priority
           />
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-8 ml-auto" aria-label="Navegação principal">
+        {/* Desktop Nav (Centro) */}
+        <nav className="hidden md:flex gap-1 absolute left-1/2 -translate-x-1/2" aria-label="Navegação principal">
           {NAV_LINKS.map((link) => (
             <button
               key={link.href}
               onClick={() => handleNavClick(link.href)}
-              className="text-sm font-medium text-foreground/60 hover:text-foreground transition-colors cursor-pointer"
+              className="text-sm font-semibold text-foreground/75 hover:text-brand-blue hover:bg-brand-blue/5 px-5 py-2 rounded-full transition-all duration-300 cursor-pointer"
             >
               {link.label}
             </button>
           ))}
         </nav>
 
-        {/* Desktop CTA */}
-        <Button
-          className="hidden md:inline-flex gradient-brand text-white font-semibold shadow-md shadow-brand-blue/20 hover:opacity-90 transition-opacity border-0"
-          onClick={() => handleNavClick('#contato')}
-          id="nav-cta"
-        >
-          Fale Conosco
-        </Button>
+        {/* Desktop CTA (Direita) */}
+        <div className="hidden md:flex items-center flex-shrink-0 z-10">
+          <Button
+            className="gradient-brand text-white font-semibold shadow-md shadow-brand-blue/20 hover:shadow-brand-blue/40 hover:-translate-y-0.5 transition-all duration-300 border-0 rounded-full px-6"
+            onClick={() => handleNavClick('#contato')}
+            id="nav-cta"
+          >
+            Falar com Consultor
+          </Button>
+        </div>
 
-        {/* Hamburger */}
+        {/* Hamburger (Mobile) */}
         <button
           className={cn(
-            'md:hidden ml-auto p-2 rounded-lg transition-colors',
+            'md:hidden z-10 p-2 rounded-full transition-colors',
             isMobileMenuOpen
-              ? 'bg-black/8 text-foreground'
+              ? 'bg-black/5 text-foreground'
               : 'text-foreground hover:bg-black/5',
           )}
           onClick={toggleMobileMenu}
@@ -140,10 +147,10 @@ export function Navbar() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="md:hidden"
+            className="absolute top-full left-4 right-4 mt-4 md:hidden"
           >
-            <div className="bg-white/98 backdrop-blur-xl border-t border-black/6 shadow-xl">
-              <nav className="px-4 pt-4 pb-2" aria-label="Menu mobile">
+            <div className="bg-white/95 backdrop-blur-xl border border-black/5 shadow-2xl rounded-3xl overflow-hidden">
+              <nav className="px-3 pt-4 pb-2" aria-label="Menu mobile">
                 {MOBILE_MENU_ITEMS.map((item, i) => {
                   const Icon = ICON_MAP[item.iconName]
                   return (
@@ -154,11 +161,11 @@ export function Navbar() {
                       initial="hidden"
                       animate="visible"
                       onClick={() => handleNavClick(item.href)}
-                      className="w-full flex items-center gap-4 px-3 py-3.5 rounded-xl hover:bg-bg-surface active:bg-bg-surface/80 transition-colors group text-left"
+                      className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl hover:bg-brand-blue/5 active:bg-brand-blue/10 transition-colors group text-left"
                     >
                       <IconBadge icon={Icon} containerSize="md" />
                       <span className="flex flex-col">
-                        <span className="text-sm font-semibold text-foreground leading-tight">
+                        <span className="text-sm font-bold text-foreground leading-tight group-hover:text-brand-blue transition-colors">
                           {item.label}
                         </span>
                         <span className="text-xs text-muted-foreground mt-0.5">
@@ -170,13 +177,13 @@ export function Navbar() {
                 })}
               </nav>
 
-              <div className="px-4 pb-5 pt-2 border-t border-black/5 mt-1">
+              <div className="px-5 pb-5 pt-3 border-t border-black/5 bg-bg-surface/50">
                 <Button
-                  className="gradient-brand text-white font-semibold border-0 w-full shadow-md shadow-brand-blue/20 hover:opacity-90 transition-opacity"
+                  className="gradient-brand text-white font-bold border-0 w-full rounded-xl shadow-lg shadow-brand-blue/20 hover:opacity-90 transition-opacity py-6 text-base"
                   onClick={() => handleNavClick('#contato')}
                   id="mobile-cta"
                 >
-                  Solicitar Proposta Agora
+                  Falar com Consultor
                 </Button>
               </div>
             </div>
