@@ -28,7 +28,7 @@ const SERVICES = [
     features: [
       'Conexão rápida e estável',
       'Wi-Fi de longo alcance',
-      'Ideal para caixas e computadores',
+      'Ideal para o dia a dia da sua equipe',
       'Suporte em horário comercial',
     ],
     ctaLabel: 'Consultar Planos',
