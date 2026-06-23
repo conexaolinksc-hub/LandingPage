@@ -2,7 +2,6 @@
 
 import { contactSchema, type ContactSchema } from '@/validators/contactValidator'
 import { resend, EMAIL_FROM, buildLeadEmail } from '@/lib/email'
-import { SITE } from '@/constants/site'
 
 export interface ContactApiResponse {
   success: boolean

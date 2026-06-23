@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 
 export function useSmoothScroll() {
-  // Use 'any' type to avoid needing the Lenis type imported synchronously
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const lenisRef = useRef<any>(null)
 
   useEffect(() => {
@@ -11,6 +11,7 @@ export function useSmoothScroll() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     let rafId: number
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let lenisInstance: any
 
     import('lenis').then(({ default: Lenis }) => {

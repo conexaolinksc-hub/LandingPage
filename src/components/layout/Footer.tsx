@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { MapPin, Phone, Mail, Clock, MessageCircle, Globe } from 'lucide-react'
 import { SITE } from '@/constants/site'
 import { NAV_LINKS } from '@/constants/navigation'
