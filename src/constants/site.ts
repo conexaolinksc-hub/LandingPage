@@ -7,6 +7,7 @@ export const SITE = {
   phone: '(27) 4042-4240',
   whatsapp: '552740424240',
   instagram: 'https://instagram.com/conexaolink',
+  website: 'https://conexaolinkes.com.br',
   address: 'Av. Califórnia, 1064 - Barramares, Vila Velha - ES',
   mapsUrl: 'https://share.google/f3cDi6ITMhZMfMy8x',
   hours: {

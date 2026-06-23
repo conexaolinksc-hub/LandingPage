@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { MapPin, Phone, Mail, Clock, MessageCircle } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, MessageCircle, Globe } from 'lucide-react'
 import { SITE } from '@/constants/site'
 import { NAV_LINKS } from '@/constants/navigation'
 
@@ -26,6 +26,15 @@ export function Footer() {
           </p>
           {/* Social */}
           <div className="flex gap-3 mt-1">
+            <a
+              href={SITE.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Site Institucional"
+              className="w-9 h-9 rounded-lg bg-bg-surface border border-black/8 flex items-center justify-center text-foreground/65 hover:text-brand-blue hover:border-brand-blue/30 hover:bg-brand-blue/5 transition-all"
+            >
+              <Globe size={16} />
+            </a>
             <a
               href={SITE.instagram}
               target="_blank"
