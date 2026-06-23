@@ -34,7 +34,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-[92vh] flex items-center overflow-hidden bg-bg-base"
+      className="relative min-h-[75vh] lg:min-h-[92vh] flex items-center overflow-hidden bg-bg-base"
     >
       {/* ── Blobs ── */}
       {blobs.map((blob, i) => (
