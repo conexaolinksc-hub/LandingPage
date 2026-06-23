@@ -97,7 +97,7 @@ function ServiceCard({ srv, i, isInView }: { srv: typeof SERVICES[number], i: nu
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: i * 0.15, ease: 'easeOut' }}
       className={`
-        group flex flex-col bg-white rounded-2xl border border-border
+        group flex flex-col bg-white rounded-lg border border-border
         ${srv.hoverBorder} hover:shadow-xl ${srv.shadow}
         hover:-translate-y-1 transition-all duration-300 overflow-hidden shadow-md
       `}

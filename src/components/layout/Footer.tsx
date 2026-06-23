@@ -30,7 +30,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Site Institucional"
-              className="w-9 h-9 rounded-lg bg-bg-surface border border-black/8 flex items-center justify-center text-foreground/65 hover:text-brand-blue hover:border-brand-blue/30 hover:bg-brand-blue/5 transition-all"
+              className="w-9 h-9 rounded-md bg-bg-surface border border-black/8 flex items-center justify-center text-foreground/65 hover:text-brand-blue hover:border-brand-blue/30 hover:bg-brand-blue/5 transition-all"
             >
               <Globe size={16} />
             </a>
@@ -39,7 +39,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="w-9 h-9 rounded-lg bg-bg-surface border border-black/8 flex items-center justify-center text-foreground/65 hover:text-brand-blue hover:border-brand-blue/30 hover:bg-brand-blue/5 transition-all"
+              className="w-9 h-9 rounded-md bg-bg-surface border border-black/8 flex items-center justify-center text-foreground/65 hover:text-brand-blue hover:border-brand-blue/30 hover:bg-brand-blue/5 transition-all"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>

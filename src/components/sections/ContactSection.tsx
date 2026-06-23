@@ -40,9 +40,9 @@ export function ContactSection() {
                     href={item.href}
                     target={item.external ? '_blank' : undefined}
                     rel={item.external ? 'noopener noreferrer' : undefined}
-                    className="flex items-center gap-4 p-4 rounded-xl border border-border bg-white hover:border-brand-blue/35 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group shadow-sm"
+                    className="flex items-center gap-4 p-4 rounded-lg border border-border bg-white hover:border-brand-blue/35 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group shadow-sm"
                   >
-                    <span className="w-10 h-10 rounded-lg bg-brand-blue/8 border border-brand-blue/15 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-blue/15 transition-colors shadow-sm">
+                    <span className="w-10 h-10 rounded-md bg-brand-blue/8 border border-brand-blue/15 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-blue/15 transition-colors shadow-sm">
                       <Icon size={18} className="text-brand-blue" />
                     </span>
                     <span className="font-medium text-sm text-foreground/70 group-hover:text-foreground transition-colors">

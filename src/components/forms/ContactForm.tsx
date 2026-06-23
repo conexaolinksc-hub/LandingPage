@@ -16,11 +16,11 @@ import { useContactForm } from '@/hooks/useContactForm'
 import { cn } from '@/lib/utils'
 import { INTEREST_OPTIONS } from '@/constants/content'
 
-/* ─── Shared field class — white bg, visible border, clear focus ─── */
+// focus-visible:ring-brand-blue/15 focus-visible:border-brand-blue h-11 rounded-sm
 const field =
   'bg-white border border-black/20 text-foreground placeholder:text-foreground/35 ' +
   'focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/15 focus-visible:ring-2 ' +
-  'focus-visible:ring-brand-blue/15 focus-visible:border-brand-blue h-11 rounded-lg'
+  'focus-visible:ring-brand-blue/15 focus-visible:border-brand-blue h-11 rounded-sm'
 
 const label = 'text-sm font-semibold text-foreground/75 tracking-wide'
 const fieldError = 'border-destructive/70 focus:border-destructive focus:ring-destructive/15'
@@ -37,7 +37,7 @@ export function ContactForm() {
     <form
       id="contact-form"
       onSubmit={onSubmit}
-      className="bg-white border border-black/10 rounded-2xl p-8 flex flex-col gap-5 shadow-lg shadow-black/5"
+      className="bg-white border border-black/10 rounded-lg p-8 flex flex-col gap-5 shadow-lg shadow-black/5"
       noValidate
     >
       {/* Nome */}
@@ -93,7 +93,7 @@ export function ContactForm() {
           >
             <SelectValue placeholder="Selecione um serviço" />
           </SelectTrigger>
-          <SelectContent className="bg-white border border-black/15 shadow-lg rounded-lg">
+          <SelectContent className="bg-white border border-black/15 shadow-lg rounded-md">
             {INTEREST_OPTIONS.map((opt) => (
               <SelectItem
                 key={opt.value}
@@ -123,7 +123,7 @@ export function ContactForm() {
             'bg-white border border-black/20 text-foreground placeholder:text-foreground/35',
             'focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/15',
             'focus-visible:ring-2 focus-visible:ring-brand-blue/15 focus-visible:border-brand-blue',
-            'rounded-lg resize-none'
+            'rounded-sm resize-none'
           )}
           {...register('mensagem')}
         />
@@ -150,7 +150,7 @@ export function ContactForm() {
       {serverMessage && (
         <div
           className={cn(
-            'flex items-center gap-3 p-4 rounded-xl text-sm font-medium',
+            'flex items-center gap-3 p-4 rounded-md text-sm font-medium',
             serverMessage.type === 'success'
               ? 'bg-brand-green/8 border border-brand-green/30 text-brand-green'
               : 'bg-destructive/8 border border-destructive/30 text-destructive'

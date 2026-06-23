@@ -94,7 +94,7 @@ export function Navbar() {
             <button
               key={link.href}
               onClick={() => handleNavClick(link.href)}
-              className="text-sm font-medium text-foreground/60 hover:text-foreground transition-colors cursor-pointer"
+              className="text-sm font-semibold text-foreground/75 hover:text-brand-blue hover:bg-brand-blue/5 px-5 py-2 rounded-md transition-all duration-300 cursor-pointer"
             >
               {link.label}
             </button>
@@ -113,7 +113,7 @@ export function Navbar() {
         {/* Hamburger */}
         <button
           className={cn(
-            'md:hidden ml-auto p-2 rounded-lg transition-colors',
+            'md:hidden z-10 p-2 rounded-md transition-colors',
             isMobileMenuOpen
               ? 'bg-black/8 text-foreground'
               : 'text-foreground hover:bg-black/5',
@@ -142,7 +142,7 @@ export function Navbar() {
             exit="exit"
             className="md:hidden"
           >
-            <div className="bg-white/98 backdrop-blur-xl border-t border-black/6 shadow-xl">
+            <div className="bg-white/95 backdrop-blur-xl border border-black/5 shadow-2xl rounded-xl overflow-hidden">
               <nav className="px-4 pt-4 pb-2" aria-label="Menu mobile">
                 {MOBILE_MENU_ITEMS.map((item, i) => {
                   const Icon = ICON_MAP[item.iconName]
@@ -154,7 +154,7 @@ export function Navbar() {
                       initial="hidden"
                       animate="visible"
                       onClick={() => handleNavClick(item.href)}
-                      className="w-full flex items-center gap-4 px-3 py-3.5 rounded-xl hover:bg-bg-surface active:bg-bg-surface/80 transition-colors group text-left"
+                      className="w-full flex items-center gap-4 px-4 py-3.5 rounded-lg hover:bg-brand-blue/5 active:bg-brand-blue/10 transition-colors group text-left"
                     >
                       <IconBadge icon={Icon} containerSize="md" />
                       <span className="flex flex-col">
@@ -172,7 +172,7 @@ export function Navbar() {
 
               <div className="px-4 pb-5 pt-2 border-t border-black/5 mt-1">
                 <Button
-                  className="gradient-brand text-white font-semibold border-0 w-full shadow-md shadow-brand-blue/20 hover:opacity-90 transition-opacity"
+                  className="gradient-brand text-white font-semibold shadow-md shadow-brand-blue/20 hover:shadow-brand-blue/40 hover:-translate-y-0.5 transition-all duration-300 border-0 rounded-md px-6 w-full"
                   onClick={() => handleNavClick('#contato')}
                   id="mobile-cta"
                 >

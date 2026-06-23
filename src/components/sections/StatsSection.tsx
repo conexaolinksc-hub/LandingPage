@@ -26,7 +26,7 @@ export function StatsSection() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: i * 0.1, ease: 'easeOut' }}
-                className="group flex flex-col items-center text-center p-6 rounded-xl border border-border bg-bg-base hover:border-brand-blue/40 hover:bg-brand-blue/5 hover:shadow-md transition-all duration-300 cursor-default"
+                className="group flex flex-col items-center text-center p-6 rounded-lg border border-border bg-bg-base hover:border-brand-blue/40 hover:bg-brand-blue/5 hover:shadow-md transition-all duration-300 cursor-default"
               >
                 <IconBadge icon={Icon} containerSize="lg" />
                 <h3 className="text-2xl font-black gradient-text mb-1">{stat.value}</h3>
