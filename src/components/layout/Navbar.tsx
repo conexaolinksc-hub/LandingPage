@@ -70,7 +70,7 @@ export function Navbar() {
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isNavScrolled
           ? 'bg-white/90 backdrop-blur-lg border-b border-black/8 shadow-sm py-3'
-          : 'bg-white/30 backdrop-blur-sm border-b border-white/40 py-4',
+          : 'bg-gradient-to-r from-brand-blue/15 to-brand-green/15 backdrop-blur-md border-b border-white/40 py-4',
       )}
       id="navbar"
     >
