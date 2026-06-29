@@ -113,7 +113,7 @@ export function Navbar() {
         {/* Hamburger */}
         <button
           className={cn(
-            'md:hidden z-10 p-2 rounded-md transition-colors',
+            'md:hidden ml-auto z-10 p-2 rounded-md transition-colors',
             isMobileMenuOpen
               ? 'bg-black/8 text-foreground'
               : 'text-foreground hover:bg-black/5',
