@@ -2,6 +2,7 @@
 
 import { contactSchema, type ContactSchema } from '@/validators/contactValidator'
 import { resend, EMAIL_FROM, buildLeadEmail } from '@/lib/email'
+import { appendLeadToSheet } from '@/lib/sheets'
 
 export interface ContactApiResponse {
   success: boolean
@@ -33,6 +34,9 @@ export async function submitContactForm(
       console.error('[ContactService] Resend error:', error)
       return { success: false, message: 'Não foi possível enviar. Tente novamente.' }
     }
+
+    // Salva na planilha em paralelo (não bloqueia a resposta ao usuário)
+    appendLeadToSheet({ nome, email, telefone, interesse, mensagem }).catch(() => {})
 
     return {
       success: true,
