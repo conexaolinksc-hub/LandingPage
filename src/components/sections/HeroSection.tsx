@@ -34,7 +34,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-[75vh] lg:min-h-[92vh] flex items-center overflow-hidden bg-bg-base"
+      className="relative overflow-hidden bg-bg-base"
     >
       {/* ── Blobs ── */}
       {blobs.map((blob, i) => (
@@ -70,21 +70,74 @@ export function HeroSection() {
         }}
       />
 
-      {/* ── Fachada mobile: fundo com overlay branco 90% ── */}
-      <div aria-hidden className="block lg:hidden absolute inset-0 pointer-events-none z-0">
-        <Image
-          src="/fachada.webp"
-          alt=""
-          fill
-          className="object-cover object-center"
-          sizes="(max-width: 1024px) 100vw, 50vw"
-          priority
-        />
-        {/* Overlay branco forte para ser quase imperceptível */}
-        <div className="absolute inset-0" style={{ background: 'oklch(0.985 0.006 264 / 0.90)' }} />
+      {/* ══════════════════════════════════════════════════ */}
+      {/* ── MOBILE: Imagem no topo + Texto abaixo ──      */}
+      {/* ══════════════════════════════════════════════════ */}
+      <div className="lg:hidden relative z-10 flex flex-col">
+        {/* Imagem da fachada (topo) */}
+        <div className="relative w-full h-[45vw] min-h-[200px] max-h-[320px] mt-16">
+          <Image
+            src="/fachada.webp"
+            alt="Fachada ConexãoLink"
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+            priority
+            style={{
+              maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+            }}
+          />
+        </div>
+
+        {/* Texto + CTAs (abaixo da imagem) */}
+        <motion.div
+          className="px-6 pb-12 -mt-4"
+          variants={fadeUpContainer}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.h1
+            variants={fadeUpItem}
+            className="text-4xl md:text-5xl font-black leading-[1.08] tracking-tight mb-5 text-foreground"
+          >
+            Conectividade que{' '}
+            <span className="gradient-text">impulsiona negócios</span>
+          </motion.h1>
+
+          <motion.p
+            variants={fadeUpItem}
+            className="text-base md:text-lg text-foreground/75 leading-relaxed mb-8"
+          >
+            Soluções empresariais e link dedicado com SLA garantido.
+            Estabilidade que a sua operação exige.
+          </motion.p>
+
+          <motion.div variants={fadeUpItem} className="flex flex-wrap gap-3">
+            <Button
+              size="lg"
+              className="gradient-brand text-white font-semibold text-base px-8 shadow-lg shadow-brand-blue/20 hover:opacity-90 transition-opacity border-0"
+              onClick={() => scrollToSection('#servicos')}
+              id="hero-cta-solutions"
+            >
+              Nossos Serviços
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="text-foreground border-black/15 bg-white/70 backdrop-blur-sm hover:bg-bg-surface hover:border-brand-blue hover:text-brand-blue transition-all text-base px-8 shadow-sm"
+              onClick={() => scrollToSection('#contato')}
+              id="hero-cta-contact"
+            >
+              Solicitar Proposta
+            </Button>
+          </motion.div>
+        </motion.div>
       </div>
 
-      {/* ── Fachada desktop (lado direito) ── */}
+      {/* ══════════════════════════════════════════════════ */}
+      {/* ── DESKTOP: Layout original (texto esq + img dir) */}
+      {/* ══════════════════════════════════════════════════ */}
       <div
         aria-hidden
         className="hidden lg:block absolute right-0 top-0 bottom-0 w-[52%] pointer-events-none"
@@ -104,16 +157,13 @@ export function HeroSection() {
         />
       </div>
 
-      {/* ── Conteúdo (esquerda) ── */}
       <motion.div
-        className="container mx-auto px-6 relative z-10 pt-28 pb-16"
+        className="hidden lg:flex container mx-auto px-6 relative z-10 pt-28 pb-16 min-h-[92vh] items-center"
         variants={fadeUpContainer}
         initial="hidden"
         animate="visible"
       >
         <div className="max-w-xl">
-
-          {/* Headline */}
           <motion.h1
             variants={fadeUpItem}
             className="text-5xl md:text-7xl font-black leading-[1.04] tracking-tight mb-6 text-foreground"
@@ -122,7 +172,6 @@ export function HeroSection() {
             <span className="gradient-text">impulsiona negócios</span>
           </motion.h1>
 
-          {/* Subtítulo */}
           <motion.p
             variants={fadeUpItem}
             className="text-lg md:text-xl text-foreground/75 leading-relaxed mb-10"
@@ -131,13 +180,12 @@ export function HeroSection() {
             Estabilidade que a sua operação exige.
           </motion.p>
 
-          {/* CTAs */}
           <motion.div variants={fadeUpItem} className="flex flex-wrap gap-4">
             <Button
               size="lg"
               className="gradient-brand text-white font-semibold text-base px-8 shadow-lg shadow-brand-blue/20 hover:opacity-90 transition-opacity border-0"
               onClick={() => scrollToSection('#servicos')}
-              id="hero-cta-solutions"
+              id="hero-cta-solutions-desktop"
             >
               Nossos Serviços
             </Button>
@@ -146,7 +194,7 @@ export function HeroSection() {
               variant="outline"
               className="text-foreground border-black/15 bg-white/70 backdrop-blur-sm hover:bg-bg-surface hover:border-brand-blue hover:text-brand-blue transition-all text-base px-8 shadow-sm"
               onClick={() => scrollToSection('#contato')}
-              id="hero-cta-contact"
+              id="hero-cta-contact-desktop"
             >
               Solicitar Proposta
             </Button>
